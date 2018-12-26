@@ -13,15 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import static android.widget.Toast.makeText;
 
 public class configActivity extends AppCompatActivity {
 private static   LinearLayout.LayoutParams layoutParams;
 public static int N =2;//nombre de variable horBAse
-public static int M =3;//nombre des contrent
+public static int M =2;//nombre des contrent
 public static boolean MaxMin=true;
     ArrayList<EditText> edittext_list;
-    private EditText txtBox ;
+    ArrayList<Button> button_list;
+
     TextView textAfichag;
 
     @Override
@@ -34,7 +36,7 @@ public static boolean MaxMin=true;
           textAfichag = (TextView) findViewById(R.id.Affichage);
 
         edittext_list = new ArrayList<EditText>();
-
+        button_list=new ArrayList<Button>();
         next.setOnClickListener(new View.OnClickListener() {
 
 
@@ -45,15 +47,14 @@ public static boolean MaxMin=true;
                 for(int i=0; i < edittext_list.size(); i++){
                     edittext_list.get(i).getText().toString();
                 }
-//                Toast.makeText(v.getContext(),  edittext_list.get(2).getText().toString(),Toast.LENGTH_LONG).show();
-                double[] objectiveFunc =  new double[N];// fonction objectif
-               double[] constraintRightSide = new double[N];// constraintRightSide
+                 double[] objectiveFunc =  new double[N];// fonction objectif
+               double[] constraintRightSide = new double[M];// constraintRightSide
 
                 for(int i=0; i <N; i++){
                      objectiveFunc[i] =Double.parseDouble(edittext_list.get(i).getText().toString());
                 }
-                //                for(int i=0; i <N; i++){
-                for(int i=0; i <M; i++){
+
+                 for(int i=0; i <M; i++){
                   constraintRightSide[i] =Double.parseDouble(edittext_list.get((N*(i+1))+(N)+(i)).getText().toString());
                 }
 
@@ -69,10 +70,27 @@ public static boolean MaxMin=true;
                              }
                 }
 
-                //  double[] objectiveFunc = { 1200,1000};// fonction objectif
-               // double[][] constraintLeftSide = { {3,4}, { 6,3} }; // les contret
 
-                Simplex.Constraint[] constraintOperator = { Simplex.Constraint.lessThan,Simplex.Constraint.lessThan  };
+                Simplex.Constraint[] constraintOperator= new Simplex.Constraint[M];
+                for(int i=0; i <button_list.size(); i++){
+
+                    switch (button_list.get(i).getText().toString()) {
+                        case "<=":
+                            makeText(v.getContext(),i+"  : "+button_list.get(i).getText().toString(),Toast.LENGTH_LONG).show();
+
+                            constraintOperator[i] =Simplex.Constraint.lessThan;
+                            break;
+                        case  ">=":
+                            constraintOperator[i] =Simplex.Constraint.greatherThan;
+
+                            break;
+                     }
+                }
+
+                //  double[] objectiveFunc = { 1200,1000};// fonction objectif
+                // double[][] constraintLeftSide = { {3,4}, { 6,3} }; // les contret
+
+                //Simplex.Constraint[] constraintOperator = { Simplex.Constraint.lessThan,Simplex.Constraint.lessThan,Simplex.Constraint.lessThan,Simplex.Constraint.lessThan  };
 
 //              double[] constraintRightSide = { 1200,1000 };
 
@@ -92,7 +110,7 @@ public static boolean MaxMin=true;
 buffer.append("Solution: " + simplex.value());
                 System.out.println("Solution: " + simplex.value());
                 textAfichag.setText(buffer.toString());
-                Toast.makeText(v.getContext() ,buffer.toString(),Toast.LENGTH_LONG).show();
+                makeText(v.getContext() ,buffer.toString(),Toast.LENGTH_LONG).show();
 
             }
 
@@ -181,7 +199,10 @@ b.setOnClickListener(new View.OnClickListener() {
         else { b.setText(">=");  LessGreather[0] =false;}
 
     }
+
 });
+        button_list.add(b);
+
 return   b;
     }
     public TextView getTextView(int id){

@@ -1,6 +1,8 @@
 package com.example.djamel.simplex;
 
 
+import android.widget.Toast;
+
 public class Simplex {
 
  private static double[][] tableaux; // tableaux
@@ -47,9 +49,8 @@ public class Simplex {
    // find leaving row p
    int p = minRatioRule(q);
    if (p == -1)
-    throw new ArithmeticException("Linear program is unbounded");
-
-   // pivot
+    throw new ArithmeticException("Le programme linéaire est illimité !");
+    // pivot
    pivot(p, q);
 
    // update basis
@@ -197,7 +198,7 @@ return buffer.toString();
   double[] objectiveFunc = { 2,-3};// fonction objectif
   double[][] constraintLeftSide = { {1,1}, { 1,-1} }; // les contret
 
-  Constraint[] constraintOperator = { Constraint.lessThan,Constraint.lessThan  };
+  Constraint[] constraintOperator = { Constraint.greatherThan,Constraint.greatherThan  };
 
   double[] constraintRightSide = { 4,6 };
 
