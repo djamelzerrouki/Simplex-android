@@ -22,6 +22,7 @@ public static int M =2;//nombre des contrent
 public static boolean MaxMin=true;
     ArrayList<EditText> edittext_list;
     private EditText txtBox ;
+    TextView textAfichag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,9 @@ public static boolean MaxMin=true;
         LinearLayout layout =new LinearLayout(this);
         layout.setOrientation(LinearLayout.HORIZONTAL);
         Button next = (Button) findViewById(R.id.simplex);
-       edittext_list = new ArrayList<EditText>();
+          textAfichag = (TextView) findViewById(R.id.Affichage);
+
+        edittext_list = new ArrayList<EditText>();
 
         next.setOnClickListener(new View.OnClickListener() {
 
@@ -44,9 +47,13 @@ public static boolean MaxMin=true;
                 }
 //                Toast.makeText(v.getContext(),  edittext_list.get(2).getText().toString(),Toast.LENGTH_LONG).show();
                 double[] objectiveFunc =  new double[N];// fonction objectif
+                double[] constraintRightSide = new double[N];// constraintRightSide
 
                 for(int i=0; i <N; i++){
                      objectiveFunc[i] =Double.parseDouble(edittext_list.get(i).getText().toString());
+                }
+                for(int i=N; i <N; i++){
+                    constraintRightSide[i] =Double.parseDouble(edittext_list.get(((i+1)*N)).getText().toString());
                 }
 
                 double[][] constraintLeftSide =  new double[M][N];
@@ -58,16 +65,15 @@ public static boolean MaxMin=true;
 
                              for (int j = 0; j < N ; j++) {
                                  constraintLeftSide[i][j] = Double.parseDouble(edittext_list.get(j+index).getText().toString());
-//} }
                              }
                 }
 
                 //  double[] objectiveFunc = { 1200,1000};// fonction objectif
                // double[][] constraintLeftSide = { {3,4}, { 6,3} }; // les contret
 
-                Simplex.Constraint[] constraintOperator = { Simplex.Constraint.greatherThan,Simplex.Constraint.greatherThan  };
+                Simplex.Constraint[] constraintOperator = { Simplex.Constraint.lessThan,Simplex.Constraint.lessThan  };
 
-                double[] constraintRightSide = { 4,2 };
+//                double[] constraintRightSide = { 1200,1000 };
 
                 Simplex.Modeler model = new Simplex.Modeler(constraintLeftSide, constraintRightSide,
                         constraintOperator, objectiveFunc);
@@ -84,7 +90,7 @@ public static boolean MaxMin=true;
 
 buffer.append("Solution: " + simplex.value());
                 System.out.println("Solution: " + simplex.value());
-
+                textAfichag.setText(buffer.toString());
                 Toast.makeText(v.getContext() ,buffer.toString(),Toast.LENGTH_LONG).show();
 
             }
