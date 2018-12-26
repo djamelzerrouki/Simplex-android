@@ -47,13 +47,13 @@ public static boolean MaxMin=true;
                 }
 //                Toast.makeText(v.getContext(),  edittext_list.get(2).getText().toString(),Toast.LENGTH_LONG).show();
                 double[] objectiveFunc =  new double[N];// fonction objectif
-              //  double[] constraintRightSide = new double[N];// constraintRightSide
+               double[] constraintRightSide = new double[N];// constraintRightSide
 
                 for(int i=0; i <N; i++){
                      objectiveFunc[i] =Double.parseDouble(edittext_list.get(i).getText().toString());
                 }
-                for(int i=N; i <N; i++){
-                  //  constraintRightSide[i] =Double.parseDouble(edittext_list.get(((i+1)*N)).getText().toString());
+                for(int i=0; i <N; i++){
+                  constraintRightSide[i] =Double.parseDouble(edittext_list.get((N*(i+1))+(N)+(i)).getText().toString());
                 }
 
                 double[][] constraintLeftSide =  new double[M][N];
@@ -73,7 +73,7 @@ public static boolean MaxMin=true;
 
                 Simplex.Constraint[] constraintOperator = { Simplex.Constraint.lessThan,Simplex.Constraint.lessThan  };
 
-              double[] constraintRightSide = { 1200,1000 };
+//              double[] constraintRightSide = { 1200,1000 };
 
                 Simplex.Modeler model = new Simplex.Modeler(constraintLeftSide, constraintRightSide,
                         constraintOperator, objectiveFunc);
