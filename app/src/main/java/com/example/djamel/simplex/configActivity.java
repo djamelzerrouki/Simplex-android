@@ -18,7 +18,7 @@ import java.util.List;
 public class configActivity extends AppCompatActivity {
 private static   LinearLayout.LayoutParams layoutParams;
 public static int N =2;//nombre de variable horBAse
-public static int M =2;//nombre des contrent
+public static int M =3;//nombre des contrent
 public static boolean MaxMin=true;
     ArrayList<EditText> edittext_list;
     private EditText txtBox ;
@@ -52,7 +52,8 @@ public static boolean MaxMin=true;
                 for(int i=0; i <N; i++){
                      objectiveFunc[i] =Double.parseDouble(edittext_list.get(i).getText().toString());
                 }
-                for(int i=0; i <N; i++){
+                //                for(int i=0; i <N; i++){
+                for(int i=0; i <M; i++){
                   constraintRightSide[i] =Double.parseDouble(edittext_list.get((N*(i+1))+(N)+(i)).getText().toString());
                 }
 
