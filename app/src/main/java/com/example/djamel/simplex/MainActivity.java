@@ -10,15 +10,13 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 EditText variablText,contrentText ;
-    TextView text;
-public static int val,contrent=0;
+ public static int val,contrent=0;
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         variablText=(EditText) findViewById(R.id.editText);
         contrentText=(EditText) findViewById(R.id.editText2);
-          text=(TextView) findViewById(R.id.editText3);
 
     }
 
@@ -30,8 +28,15 @@ public static int val,contrent=0;
 
                  Toast.makeText(this,"good !",Toast.LENGTH_LONG).show();
 
+                 Intent intent = new Intent(this, configActivity.class);
+                 int val1 = val;
 
-                text.setText(Simplex .show());
+                 intent.putExtra("code1", val);
+                 intent.putExtra("code2", contrent);
+
+                 startActivity(intent);
+
+              //  text.setText(Simplex .show());
              }else {
                  Toast.makeText(this,"Ajouter Numr des valer et des contrant svp !",Toast.LENGTH_LONG).show();
              }

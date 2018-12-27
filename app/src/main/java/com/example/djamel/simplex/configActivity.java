@@ -51,11 +51,19 @@ public static boolean MaxMin=true;
                double[] constraintRightSide = new double[M];// constraintRightSide
 
                 for(int i=0; i <N; i++){
+                    if (edittext_list.get(i).getText().toString().trim().equals(null)){
                      objectiveFunc[i] =Double.parseDouble(edittext_list.get(i).getText().toString());
+                    }else {
+                      makeText(v.getContext(),"Remplir tous les paramètre de la fonction Objectif !",Toast.LENGTH_LONG).show();
+                    }
                 }
 
                  for(int i=0; i <M; i++){
-                  constraintRightSide[i] =Double.parseDouble(edittext_list.get((N*(i+1))+(N)+(i)).getText().toString());
+                     if (edittext_list.get(i).getText().toString().trim().equals(null)){
+                         constraintRightSide[i] =Double.parseDouble(edittext_list.get((N*(i+1))+(N)+(i)).getText().toString());
+                     }else {
+                         makeText(v.getContext(),"Remplir tous les paramètre des contrents !",Toast.LENGTH_LONG).show();
+                     }
                 }
 
                 double[][] constraintLeftSide =  new double[M][N];
@@ -66,7 +74,11 @@ public static boolean MaxMin=true;
                              index=((i+1)*N)+i;
 
                              for (int j = 0; j < N ; j++) {
-                                 constraintLeftSide[i][j] = Double.parseDouble(edittext_list.get(j+index).getText().toString());
+                                 if (edittext_list.get(i).getText().toString().trim().equals(null)){
+                                     constraintLeftSide[i][j] = Double.parseDouble(edittext_list.get(j+index).getText().toString());
+                                 }else {
+                                     makeText(v.getContext(),"Remplir tous les paramètre  !",Toast.LENGTH_LONG).show();
+                                 }
                              }
                 }
 
