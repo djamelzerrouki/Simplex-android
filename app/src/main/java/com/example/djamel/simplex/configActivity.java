@@ -1,5 +1,6 @@
 package com.example.djamel.simplex;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -18,8 +19,8 @@ import static android.widget.Toast.makeText;
 
 public class configActivity extends AppCompatActivity {
 private static   LinearLayout.LayoutParams layoutParams;
-public static int N =2;//nombre de variable horBAse
-public static int M =2;//nombre des contrent
+public static int N  ;//nombre de variable horBAse
+public static int M ;//nombre des contrent
 public static boolean MaxMin=true;
     ArrayList<EditText> edittext_list;
     ArrayList<Button> button_list;
@@ -29,7 +30,15 @@ public static boolean MaxMin=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Get the Intent that started this activity and extract the string
+
+
         setContentView(R.layout.activity_config);
+        Intent intent = getIntent();
+        Toast.makeText(this,"N= "+ intent.getStringExtra(MainActivity.EXTRA_VARIABLE),Toast.LENGTH_LONG).show();
+       N = Integer.parseInt(intent.getStringExtra(MainActivity.EXTRA_VARIABLE));
+       M = Integer.parseInt(intent.getStringExtra(MainActivity.EXTRA_CONTRENT));
+
         LinearLayout layout =new LinearLayout(this);
         layout.setOrientation(LinearLayout.HORIZONTAL);
         Button next = (Button) findViewById(R.id.simplex);
@@ -37,6 +46,8 @@ public static boolean MaxMin=true;
 
         edittext_list = new ArrayList<EditText>();
         button_list=new ArrayList<Button>();
+
+
         next.setOnClickListener(new View.OnClickListener() {
 
 
@@ -51,19 +62,11 @@ public static boolean MaxMin=true;
                double[] constraintRightSide = new double[M];// constraintRightSide
 
                 for(int i=0; i <N; i++){
-                    if (edittext_list.get(i).getText().toString().trim().equals(null)){
                      objectiveFunc[i] =Double.parseDouble(edittext_list.get(i).getText().toString());
-                    }else {
-                      makeText(v.getContext(),"Remplir tous les paramètre de la fonction Objectif !",Toast.LENGTH_LONG).show();
-                    }
                 }
 
                  for(int i=0; i <M; i++){
-                     if (edittext_list.get(i).getText().toString().trim().equals(null)){
-                         constraintRightSide[i] =Double.parseDouble(edittext_list.get((N*(i+1))+(N)+(i)).getText().toString());
-                     }else {
-                         makeText(v.getContext(),"Remplir tous les paramètre des contrents !",Toast.LENGTH_LONG).show();
-                     }
+                  constraintRightSide[i] =Double.parseDouble(edittext_list.get((N*(i+1))+(N)+(i)).getText().toString());
                 }
 
                 double[][] constraintLeftSide =  new double[M][N];
@@ -74,11 +77,7 @@ public static boolean MaxMin=true;
                              index=((i+1)*N)+i;
 
                              for (int j = 0; j < N ; j++) {
-                                 if (edittext_list.get(i).getText().toString().trim().equals(null)){
-                                     constraintLeftSide[i][j] = Double.parseDouble(edittext_list.get(j+index).getText().toString());
-                                 }else {
-                                     makeText(v.getContext(),"Remplir tous les paramètre  !",Toast.LENGTH_LONG).show();
-                                 }
+                                 constraintLeftSide[i][j] = Double.parseDouble(edittext_list.get(j+index).getText().toString());
                              }
                 }
 
@@ -88,7 +87,6 @@ public static boolean MaxMin=true;
 
                     switch (button_list.get(i).getText().toString()) {
                         case "<=":
-                            makeText(v.getContext(),i+"  : "+button_list.get(i).getText().toString(),Toast.LENGTH_LONG).show();
 
                             constraintOperator[i] =Simplex.Constraint.lessThan;
                             break;

@@ -11,7 +11,12 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 EditText variablText,contrentText ;
  public static int val,contrent=0;
-     @Override
+
+    public static final String EXTRA_VARIABLE="com.example.djamel.simplex1";
+    public static final String EXTRA_CONTRENT="com.example.djamel.simplex2";
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -31,8 +36,8 @@ EditText variablText,contrentText ;
                  Intent intent = new Intent(this, configActivity.class);
                  int val1 = val;
 
-                 intent.putExtra("code1", val);
-                 intent.putExtra("code2", contrent);
+                 intent.putExtra(MainActivity.EXTRA_VARIABLE, ""+val);
+                 intent.putExtra(MainActivity.EXTRA_CONTRENT, ""+contrent);
 
                  startActivity(intent);
 
