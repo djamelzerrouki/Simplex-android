@@ -230,7 +230,7 @@ return   b;
     public EditText getEditText(int id){
         EditText e= new EditText(this);
         e.setId(id);
-        e.setInputType(InputType.TYPE_CLASS_NUMBER);
+        e.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
         LinearLayout.LayoutParams layoutParams = new  LinearLayout.LayoutParams(70, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(5, 3, 0, 0);
         e.setLayoutParams(layoutParams);
