@@ -2,10 +2,10 @@
 ## Linear programming and simplex algorithm
 A linear programming problem is a mathematical problem of optimization of a linear function under constraints of affine inequalities. More precisely, it is a question of determining the maximum of a function of the type
 
- 	a1x1+⋯+anxn
+ 	                  a1*x1+⋯+an*xn
 where the variables x1,…,xn verify type inequalities
 
- 	ci,1x1+⋯+ci,nxn≤bi,	
+                   	ci,1x1+⋯+ci,nxn≤bi,	
 for 1 ≤ i ≤p. Such problems frequently occur in economics.
 
 There are several algorithms to solve such problems. The best known is the simplex algorithm. We propose to study its operation on an example. We have soft variables, x, y and we want to maximize the quantity
