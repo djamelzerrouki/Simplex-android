@@ -1,4 +1,4 @@
-# Simplex Android
+# Simplex Android 📱💡✔
 ## Linear programming and simplex algorithm
 A linear programming problem is a mathematical problem of optimization of a linear function under constraints of affine inequalities. More precisely, it is a question of determining the maximum of a function of the type
 
